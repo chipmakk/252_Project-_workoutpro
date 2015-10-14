@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        
+        <!--Jquey links  note: *jquery link must be before jquery-mobile link*-->
+        <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.2.min.js"></script>
+       <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.2.min.css" /> 
+       <link rel="stylesheet" type="text/css" href="css/index.css" /> 
+       
+        <title>Workout Pro</title> <!--title of app icon-->
+    </head>
+<body>
+<!--home_page-->
+    <div data-role="page" id="home" data-theme="b">
+        <div data-role="header">
+            <h1>Workout Pro</h1>
+        </div><!--/header-->
+            <div data-role= "content">
+                <div data-role="controlgroup" data-type= "vertical">
+                    <a href="#select_workout" class="ui-btn">Workout</a>
+                    <a href="#playlist" class="ui-btn">Playlist Settings</a>
+                    <a herf="#s_audio" class="ui-btn">Audio Settings</a>
+                </div><!--/controlgroup-->                    
+            </div><!--/content-->
+                <div data-role="footer">
+                </div><!--footer-->
+    </div><!--/page-->
+
+<!--select workout page-->
+    <div data-role="page" id="select_workout">
+        <div data-role="header">
+            <h1>Select Workout</h1>
+            <!--backbutton-->
+            <a data-role="button" data-rel="back" data-icon ="arrow-l">Back</a>
+        </div><!--/header-->
+            <div data-role= "content">
+                <div data-role="controlgroup" data-type="vertical"> 
+                    <a href="#new" class="ui-btn">New Workout</a>
+                </div><!--/control_group_DIV-->
+                    <div>
+                        <p>Select desired workouts from below.</p>
+                    </div>
+                        <div id="display_data">
+                        </div> <!--Workout_data-->
+                    <!--saved_workouts_checkboxes-->
+                    <form>
+                        <fieldset>
+                             <div>
+                                <label for="w1">Workout 1<p id="demo"></p></label>
+                                <input type="checkbox"name="w1" id="w1" value="">
+
+                                <label for="w2">Workout 2</label>
+                                <input type="checkbox"name="w2" id="w2" value=""> 
+                                <label for="w3">Workout 3</label>
+                                <input type="checkbox"name="w3" id="w3" value=""> 
+                            </div><!--/saved_workouts_checkboxes_DIV-->
+                        </fieldset>
+                    </form>
+                <div data-role="controlgroup" data-type="vertical">
+                    <a href="#sprun" class="ui-btn">Run!/Select Playlist</a>
+                </div><!--/control_gorup_DIV-->
+            </div><!--/content-->
+                <div data-role="footer">
+                </div><!--footer-->
+    </div><!--/page-->
+
+<!--new workout page-->
+    <div data-role="page" id="new">
+        <div data-role="header">
+            <h1>New Workout</h1>
+            <!--backbutton-->
+            <a data-role="button" data-rel="back" data-icon ="arrow-l">Back</a>
+        </div><!--/header-->
+            <div data-role= "content">
+                <h3> Create Custom Workout<h3>
+                <!--create custom workout form-->
+                <form id="target"action="#select_workout" method="get">
+                    <!--workout name input-->
+                    <fieldset>
+                        <label for="custom" class="ui-hidden-accessible"></label>
+                        <input type="text" name="custom" id="custom" value="" placeholder="Name Workout:"/> 
+                    <!--set options -->
+                        <div data-role="collapsible">
+                            <h3>Set Options</h3>
+                            <label for="sd">Set Duration in Seconds:</label>
+                            <input type="number" name="sd" id="sd"></input>
+                            <label for="rd">Rest Duration in Seconds:</label>
+                            <input type="number" name="rd" id="rd"></input>
+                        </div> <!--/collapsible_set_options DIV-->
+                    <!--audio notifications -->
+                        <div data-role="collapsible">
+                            <h3>Audio Notifications</h3>
+                            <!--Begining of set alert-->
+                            <label for="b_alr">Beginning of Set Alert:</label>
+                                <select name="b_alr" id="b_alr">
+                                    <option value="Lbeep">Long Beep</option>
+                                    <option value="beep">Single Beep</option>
+                                    <option value="2beep">Double Beep</option>
+                                </select>  
+                              <!--end of set alert-->  
+                            <label for="e_alr">End of Set Alert:</label>
+                                <select name="e_alr" id="e_alr">
+                                    <option value="Lbeep">Long Beep</option>
+                                    <option value="beep">Single Beep</option>
+                                    <option value="2beep">Double Beep</option>
+                                </select>
+                        </div><!--/collapsible_audio_notification DIV-->
+                        <!--Save/add_workout-->
+                        <div> 
+                            <a href="#save" data-rel="popup" class="ui-btn">Save and add to workout list.</a>
+                            <div data-role="popup" id="save" class="ui-content">
+                                <h4>Are you sure you want to save/add this workout?</h4> 
+
+                                <button class="ui-btn-inline" id="add" oneclick="savewk()">Yes, add workout.</button>
+                                <button class="ui-btn-inline" id="no">No, do not add this workout.</button>
+                            </div><!--/popup_DIV-->
+                        </div><!--/save_button/add_workout DIV_link to popup-->
+                    </fieldset><!--/create_custom_workout_form-->
+                </form><!--/create_custom_workout_form-->
+            </div><!--/content-->
+                <div data-role="footer">
+                </div><!--footer-->
+    </div><!--/page-->
+
+<!--select playlist/ run page-->
+    <div data-role="page" id="sprun">
+        <div data-role="header">
+            <!--backbutton-->
+            <a data-role="button" data-rel="back" data-icon ="arrow-l">Back</a>
+            <h5>Workout Pro is Ready</h5>
+        </div><!--/header-->
+            <div data-role= "content">
+                
+                <p>Scroll through and select a playlist.</p>
+                    <form>
+                        <fieldset>
+                             <div>
+                                <label for="p1">Playlist 1</label>
+                                <input type="checkbox"name="p1" id="p1" value="">
+                                <label for="p2">Playlist 2</label>
+                                <input type="checkbox"name="p2" id="p2" value="">
+                                <label for="p3">Playlist 3</label>
+                                <input type="checkbox"name="p3" id="p3" value=""> 
+                            </div><!--/saved_playlists_checkboxes_DIV-->
+                        </fieldset>
+                    </form> 
+                    <div>
+                        <p>Workout Progress Info and timer will be Displayed below</p>
+                    </div>               
+                    <div>
+                        <button class="ui-btn-inline" id="run">Run Workout</button>
+                        <button class="ui-btn-inline" id="stop">Stop Workout</button>
+                    </div>
+            </div><!--/content-->
+                <div data-role="footer">
+                </div><!--footer-->
+    </div><!--/page-->
+
+<!--Playlist settings page-->
+    <div data-role="page" id="playlist">
+        <div data-role="header">
+            <!--backbutton-->
+            <a data-role="button" data-rel="back" data-icon ="arrow-l">Back</a>
+            <h1>Playlist settings</h1>
+        </div><!--/header-->
+            <div data-role= "content">
+                <div>
+                </div>
+                <div data-role="controlgroup" data-type="vertical"> 
+                    <a href="#music" class="ui-btn">Create Playlist</a>
+                </div><!--/control_group_DIV-->
+                    <div>
+                        <button class="ui-btn-inline" id="p1">Playlist 1</button>
+                        <button class="ui-btn-inline" id="p2">Playlist 2</button>
+                        <button class="ui-btn-inline" id="p3">Playlist 3</button>
+                    </div>
+
+            </div><!--/content-->
+                <div data-role="footer">
+                </div><!--footer-->
+    </div><!--/page-->
+
+<!--Music library page-->
+    <div data-role="page" id="music">
+        <div data-role="header">
+            <!--backbutton-->
+            <a data-role="button" data-rel="back" data-icon ="arrow-l">Back</a>
+            <h3>Music Library</h3>
+        </div><!--/header-->
+            <div data-role= "content">
+                <p>imported music checkoff list</p>
+                <form id="pf"action="#playlist" method="get">
+                    <fieldset>
+                        <label for="cp" class="ui-hidden-accessible"></label>
+                        <input type="text" name="cp" id="cp" value="" placeholder="Name Playlist:"/> 
+                <button class="ui-btn-inline" id="ms">Save playlist</button>
+                    </fieldset>
+                </form>
+            </div><!--/content-->
+                <div data-role="footer">
+                </div><!--footer-->
+    </div><!--/page-->
+
+<!--Audio Settings page-->
+    <div data-role="page" id="s_audio">
+        <div data-role="header">
+            <h3>Audio Settings</h3>
+            <!--backbutton-->
+            <a data-role="button" data-rel="back" data-icon ="arrow-l">Back</a>
+        </div><!--/header-->
+            <div data-role= "content">
+            </div><!--/content-->
+                <div data-role="footer">
+                </div><!--footer-->
+    </div><!--/page-->
+</body>
+</html>
